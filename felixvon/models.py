@@ -45,15 +45,15 @@ class Tag(models.Model):
 
 
 class Blog(models.Model):
-    title = models.CharField(u'标题', max_length=100)
-    head_pic_url = models.CharField(u'头图链接', max_length=250, default='/static/img/default.jpg')
+    title = models.CharField(u'Title', max_length=100)
+    head_pic_url = models.CharField(u'Head_pic_url', max_length=250, default='/static/img/default.jpg')
     pub_time = models.DateTimeField(auto_now_add=True)
-    brief = models.CharField(u'摘要', max_length=200, blank=True, null=True)
-    content = UEditorField(u'正文', width=900, height=600, toolbars="full", imagePath="", settings={})
-    page_views = models.PositiveIntegerField(u'阅读量', default=0, editable=False)
-    category1 = models.ForeignKey(Category1, verbose_name=u'一级目录')
-    category2 = models.ForeignKey(Category2, null=True, verbose_name=u'二级目录')
-    tags = models.ManyToManyField(Tag, blank=True, verbose_name=u'标签')
+    brief = models.CharField(u'Brief', max_length=200, blank=True, null=True)
+    content = UEditorField(u'Content', width=900, height=600, toolbars="full", imagePath="", settings={})
+    page_views = models.PositiveIntegerField(u'Page_views', default=0, editable=False)
+    category1 = models.ForeignKey(Category1, verbose_name=u'Category1')
+    category2 = models.ForeignKey(Category2, null=True, verbose_name=u'Category2')
+    tags = models.ManyToManyField(Tag, blank=True, verbose_name=u'Tags')
 
     def __unicode__(self):
         return self.title
@@ -74,11 +74,11 @@ class Profile_Tag(models.Model):
 
 
 class Profile(models.Model):
-    title = models.CharField(u'标题', max_length=100)
-    head_pic_url = models.CharField(u'头图链接', max_length=250, default='/static/img/default.jpg', null=True, blank=True)
+    title = models.CharField(u'Title', max_length=100)
+    head_pic_url = models.CharField(u'Head_pic_url', max_length=250, default='/static/img/default.jpg', null=True, blank        =True)
     pub_time = models.DateTimeField(auto_now_add=True)
-    content = UEditorField(u'正文', width=900, height=600, toolbars="full", imagePath="", settings={})
-    tags = models.ManyToManyField(Profile_Tag, blank=True, verbose_name=u'标签')
+    content = UEditorField(u'Content', width=900, height=600, toolbars="full", imagePath="", settings={})
+    tags = models.ManyToManyField(Profile_Tag, blank=True, verbose_name=u'Tags')
 
     def __unicode__(self):
         return self.title
@@ -100,8 +100,8 @@ class Friend_Tag(models.Model):
 
 class Friend(models.Model):
     name = models.CharField(max_length=50, db_index=True, unique=True)
-    friend_url = models.CharField(u'链接', max_length=250, default='http://')
-    tags = models.ManyToManyField(Friend_Tag, blank=True, verbose_name=u'标签')
+    friend_url = models.CharField(u'Url', max_length=250, default='http://')
+    tags = models.ManyToManyField(Friend_Tag, blank=True, verbose_name=u'Tags')
 
     def __unicode__(self):
         return self.name
